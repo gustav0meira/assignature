@@ -81,7 +81,7 @@ function route($routeName){
 	$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 	$fullUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$urlParts = parse_url($fullUrl);
-	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '/';
+	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '';
 	$appLocal = $baseUrl;
 	header('Location: ' . $appLocal . $routeName);
 }
@@ -90,7 +90,7 @@ function routeLink($routeName){
 	$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 	$fullUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$urlParts = parse_url($fullUrl);
-	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '/';
+	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '';
 	$appLocal = $baseUrl;
 	return $appLocal . $routeName;
 }

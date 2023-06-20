@@ -19,7 +19,6 @@ require "config/cdn.php";
 
 		<h1>Faça Login no <?php echo $appName ?></h1>
 		<p>Para acessar o <?php echo $appName ?> faça login utilizando e-mail e senha.</p>
-		<p><?php echo $appLocal ?></p>
 
 		<label>E-mail</label><br>
 		<input required placeholder="Insira aqui o seu e-mail..." id="email" type="email" name="email"><br>
