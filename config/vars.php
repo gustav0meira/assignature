@@ -2,8 +2,8 @@
 
 	// =============== VARS
 	// app
-	$appName = 'Assignature';
-	$notifyCount = 56;
+	$appName = 'The Circle';
+	$notifyCount = 9;
 	$domain = $_SERVER['HTTP_HOST'];
 	$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 	$fullUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; $urlParts = parse_url($fullUrl);
@@ -69,7 +69,7 @@ p.v{
 <?php if ($notifyCount >= 1) { echo '<link rel="icon" type="image/x-icon" href="assets/favicon/1.png">'; } ?>
 
 <!-- ================  copyright  ================ -->
-<style>p.copy{ position:absolute; color: #FFFFFF25; bottom: 10; cursor: default; font-size:0.5rem; font-family:Poppins; left:50%; transform:translateX(-50%); }</style>
+<style>p.copy{ position:fixed; color: #FFFFFF10; bottom: 5; cursor: default; font-size:0.5rem; font-family:Poppins; left:50%; transform:translateX(-50%); }</style>
 <p class="copy">Todos os direitos reservados à The Circle ©</p>
 
 
@@ -81,7 +81,7 @@ function route($routeName){
 	$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 	$fullUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$urlParts = parse_url($fullUrl);
-	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '';
+	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '/';
 	$appLocal = $baseUrl;
 	header('Location: ' . $appLocal . $routeName);
 }
@@ -90,7 +90,7 @@ function routeLink($routeName){
 	$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 	$fullUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$urlParts = parse_url($fullUrl);
-	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '';
+	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '/';
 	$appLocal = $baseUrl;
 	return $appLocal . $routeName;
 }

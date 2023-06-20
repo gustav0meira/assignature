@@ -22,7 +22,7 @@ require "config/leftbar.php";
 			<div class="col-3">
 				<div class="module">
 					<div class="row">
-						<div class="col-3">
+						<div class="col-4">
 							<i class="fa-solid fa-pen-nib item-module align"></i>
 						</div>
 						<div class="col-sm">
@@ -35,7 +35,7 @@ require "config/leftbar.php";
 			<div class="col-3">
 				<div class="module">
 					<div class="row">
-						<div class="col-3">
+						<div class="col-4">
 							<i class="fa-solid fa-user item-module align"></i>
 						</div>
 						<div class="col-sm">
@@ -45,15 +45,28 @@ require "config/leftbar.php";
 					</div>
 				</div>
 			</div>
-			<div class="col-6">
+			<div class="col-3">
 				<div class="module">
 					<div class="row">
-						<div class="col-1">
-							<i class="fa-solid fa-file item-module align"></i>
+						<div class="col-4">
+							<i class="fa-solid fa-user item-module align"></i>
 						</div>
 						<div class="col-sm">
-							<label style="margin-left: 17px;" class="submoduleTitle">Ultimo Contrato</label><br>
-							<label style="margin-left: 17px;" class="submoduleDesc">Contrato de locação - Apartamento 156 | Ibira [...]</label>
+							<label class="submoduleTitle">Clientes</label><br>
+							<label class="submoduleDesc">0</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="module">
+					<div class="row">
+						<div class="col-4">
+							<i class="fa-solid fa-user item-module align"></i>
+						</div>
+						<div class="col-sm">
+							<label class="submoduleTitle">Clientes</label><br>
+							<label class="submoduleDesc">0</label>
 						</div>
 					</div>
 				</div>

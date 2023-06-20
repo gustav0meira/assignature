@@ -157,10 +157,23 @@
 			<div class="leftLink">
 				<div class="row">
 					<div class="col-3">
+						<i class="fa-solid fa-dollar align"></i>
+					</div>
+					<div class="col-sm">
+						<label class="align">Financeiro</label>
+					</div>
+				</div>
+			</div>
+		</a>
+
+		<a href="<?php echo routeLink('contratos'); ?>">
+			<div class="leftLink">
+				<div class="row">
+					<div class="col-3">
 						<i class="fa-regular fa-file align"></i>
 					</div>
 					<div class="col-sm">
-						<label class="align">Contratos</label>
+						<label class="align">Projetos</label>
 					</div>
 				</div>
 			</div>
