@@ -1,0 +1,1 @@
+<?php $conn = new mysqli('apolo.dev.br', 'u868458939_assignature', 'Caquis55#', 'u868458939_assignature'); ?>

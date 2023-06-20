@@ -1,0 +1,46 @@
+.item-module{
+	border-radius: 15px !important;
+	background: #8774E1 !important;
+	padding: 13px 16px 13px 16px !important;
+}
+
+.submoduleTitle{
+	font-size: 0.8rem;
+	color: #8b8c8f !important;
+}
+
+.submoduleDesc{
+	font-size: 1rem;
+}
+
+.moduleTitle{
+	font-size: 1rem !important;
+	font-weight: 300;
+	color: #8b8c8f;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#faturasAg{
+	width: 100% !important;
+}
+
+.faturas{
+	padding: 20px !important;
+}
+
+.faturas label{
+	margin-top: 15px;
+}
+
+.codeNotion{
+	padding: 5px;
+	border-radius: 5px;
+	background: #454648 !important;
+}
+
+.faturas .fa-circle{
+	font-size: 1.5rem;
+	margin-bottom: -3px;
+	margin-right: 10px;
+}

@@ -1,0 +1,102 @@
+.mc div.pp{
+	width: 100%;
+	padding-bottom: 100%;
+	border-radius: 15px !important;
+	background-size: cover !important;
+	background-position: center center !important;
+	transition: all 200ms;
+	cursor: pointer !important;
+}
+
+.mc div.pp:hover{
+	opacity: 0.5;
+}
+
+.inputAccount label{
+	position: relative;
+	font-size: 0.7rem !important;
+	padding: 5px;
+	margin-top: 0px !important;
+	font-weight: 300;
+	margin-bottom: -13px;
+	color: #FFFFFF90;
+	margin-left: 10px;
+	background: #56585a;
+	padding-top: 0px;
+}
+
+.inputAccount input,
+.inputAccount select{
+	width: 100%;
+	background: transparent;
+	font-size: 0.8rem !important;
+	font-weight: 300 !important;
+	margin-bottom: 20px;
+	padding: 10px;
+	padding-left: 15px;
+	border-radius: 15px;
+	color: #ffffffe8;
+	border: 1px solid #FFFFFF20;
+}
+
+hr{
+	border-color: #FFFFFF20;
+	margin-bottom: 20px;
+}
+
+button{
+	padding: 10px;
+	font-size: 0.8rem;
+	background: #8774E1;
+	color: white;
+	border-radius: 15px;
+	border: none;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.plan{
+	margin-top: 10px;
+}
+
+.plan label.title{
+	color: #FFFFFF60;
+	font-size: 0.7rem;
+	font-weight: 200 !important;
+}
+
+.plan .planName{
+	font-size: 1rem !important;
+	
+}
+
+.planIco{
+	width: 100%;
+	padding-bottom: 97%;
+	background-size: cover !important;	
+	background-position: center center !important;
+}
+
+option{
+	color: black !important;
+}
+
+p.phr{
+	color: #FFFFFF80;
+	font-size: 0.8rem;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.warning{
+	background: #e6a522 !important;
+	font-size: 0.8rem !important;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
+
+.warning a{
+	color: white;
+	text-decoration: underline !important;
+	cursor: pointer !important;
+}
