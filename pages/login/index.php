@@ -1,7 +1,7 @@
 <?php 
-require "config/vars.php";
-require "config/sql.php";
-require "config/cdn.php";
+require "../../config/vars.php";
+require "../../config/sql.php";
+require "../../config/cdn.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,13 +9,13 @@ require "config/cdn.php";
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="assets/css/login.css">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/login.css">
 </head>
 <body>
 	<div class="login">
 		<form action="#" method="POST">
 
-		<center><img class="logo" src="assets/logo.png"></center>
+		<center><img class="logo" src="../../assets/logo.png"></center>
 
 		<h1>Faça Login no <?php echo $appName ?></h1>
 		<p>Para acessar o <?php echo $appName ?> faça login utilizando e-mail e senha.</p>

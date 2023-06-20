@@ -5,6 +5,7 @@
 	$appName = 'The Circle';
 	$notifyCount = 9;
 	$domain = $_SERVER['HTTP_HOST'];
+	$url = isset($_GET['url']) ? $_GET['url'] : '';
 	$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 	$fullUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; $urlParts = parse_url($fullUrl);
 	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '/';
@@ -66,6 +67,7 @@ p.v{
 
 <!-- =================  favicon  ================= -->
 <link rel="icon" type="image/x-icon" href="assets/favicon/0.png">
+<link rel="icon" type="image/x-icon" href="../../assets/favicon/0.png">
 <?php if ($notifyCount >= 1) { echo '<link rel="icon" type="image/x-icon" href="assets/favicon/1.png">'; } ?>
 
 <!-- ================  copyright  ================ -->
@@ -83,7 +85,7 @@ function route($routeName){
 	$urlParts = parse_url($fullUrl);
 	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '';
 	$appLocal = $baseUrl;
-	header('Location: ' . $appLocal . $routeName);
+	header('Location: ' . $appLocal . '/' . $routeName);
 }
 
 function routeLink($routeName){
@@ -92,7 +94,7 @@ function routeLink($routeName){
 	$urlParts = parse_url($fullUrl);
 	$baseUrl = $protocol . '://' . $urlParts['host'] . dirname($urlParts['path']) . '';
 	$appLocal = $baseUrl;
-	return $appLocal . $routeName;
+	return $appLocal . '/' . $routeName;
 }
 
 

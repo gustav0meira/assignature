@@ -1,12 +1,12 @@
 <?php 
-require "config/vars.php";
-require "config/sql.php";
+require "../../config/vars.php";
+require "../../config/sql.php";
 
 session_start(); verifyAuth();
 $user = catchUser($_SESSION['id'], $conn);
 
-require "config/cdn.php";
-require "config/leftbar.php";
+require "../../config/cdn.php";
+require "../../config/leftbar.php";
 ?>
 
 
@@ -15,7 +15,7 @@ require "config/leftbar.php";
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="assets/css/minha-conta.css">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/minha-conta.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 </head>
@@ -25,28 +25,12 @@ require "config/leftbar.php";
 			<div class="col-3">
 				<div class="row">
 					<div class="col-12">
-						<div onclick="abrirCampoArquivo()" style="background: url('assets/pp/<?php echo $user['pp']; ?>');" class="pp"></div>
+						<div onclick="abrirCampoArquivo()" style="background: url('../../assets/pp/<?php echo $user['pp']; ?>');" class="pp"></div>
 						<form method="POST" enctype="multipart/form-data" action="<?php echo routeLink('newPP'); ?>" id="formPP">
 							<input required type="file" name="pp" id="pp" style="display: none !important;">
 							<input required type="hidden" value="<?php echo $user['username'] ?>" name="username">
 							<input required type="hidden" value="<?php echo $user['id'] ?>" name="id">
 						</form>
-					</div>
-					<div class="col-12">
-						<div class="plan module">
-							<div class="row">
-								<div style="padding-right: 5px !important;" class="col-3">
-									<?php $plan = planById($user['id'], $conn); ?>
-									<div class="planIco align" style="background: url(<?php echo $plan[0] ?>);"></div>
-								</div>
-								<div class="col-9">
-									<div class="align">
-										<label class="title">Plano Atual:</label><br>
-										<label class="planName"><?php echo $plan[1] ?></label>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

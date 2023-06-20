@@ -109,7 +109,7 @@
 
 		<center>
 			<a href="<?php echo routeLink('dashboard'); ?>">
-				<img class="logo" src="<?php echo $appLocal ?>assets/logo.png">
+				<img class="logo" src="../../assets/logo.png">
 			</a>
 		</center>
 
@@ -121,7 +121,7 @@
 					<div class="container">
 						<div class="row">
 							<div style="padding-right: 10px !important;" class="col-4">
-								<div style="background: url('<?php echo $appLocal . 'assets/pp/' . $user['pp']; ?>');" class="pp"></div>
+								<div style="background: url('../../assets/pp/<?php echo $user['pp']; ?>');" class="pp"></div>
 							</div>
 							<div class="col-sm">
 								<label class="align dropdown-toggle"><?php echo $user['name']; ?>  </label>
