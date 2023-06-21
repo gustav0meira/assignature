@@ -68,7 +68,7 @@
 	div.hr{
 		margin-top: 20px;
 		margin-bottom: 20px;
-		border-top: 1px solid #FFFFFF10;
+		border-top: 1px solid #FFFFFF05;
 	}
 
 	.userProfile{
@@ -97,9 +97,9 @@
 	}
 
 	.logo{
-		width: 20%;
-		margin-top: 20px;
-		margin-bottom: 20px;
+		width: 40%;
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 
 </style>
@@ -124,7 +124,7 @@
 								<div style="background: url('../../assets/pp/<?php echo $user['pp']; ?>');" class="pp"></div>
 							</div>
 							<div class="col-sm">
-								<label class="align dropdown-toggle"><?php echo $user['name']; ?>  </label>
+								<label class="align dropdown-toggle"><?php echo ucfirst($user['username']); ?>  </label>
 							</div>
 						</div>
 					</div>
@@ -153,7 +153,7 @@
 			</div>
 		</a>
 
-		<a href="<?php echo routeLink('contratos'); ?>">
+		<a href="<?php echo routeLink('financeiro'); ?>">
 			<div class="leftLink">
 				<div class="row">
 					<div class="col-3">
@@ -358,9 +358,19 @@ document.addEventListener('click', function(event) {
 					   ﾠ<i class="fa-solid fa-bell"></i> <?php echo $notifyCount; ?>ﾠ
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark">
+					<?php
+					setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+					date_default_timezone_set('America/Sao_Paulo');
+					$userId = $user['id'];
+					$consulta = "SELECT * FROM notifications WHERE user_id = '$userId' LIMIT 5";
+					$con = $conn->query($consulta) or die($conn->error);
+
+					if (mysqli_num_rows($con) > 0) {
+					while($dado = $con->fetch_array()) { ?>
 						<li><a class="dropdown-item" href="<?php echo routeLink('invoices'); ?>">
-							📄 Você tem um contrato para assinarﾠ<label class="ntfDate"><?php echo date('M/d | h:i'); ?></label></a>
+						<?php echo $dado['icon'] . ' ' . $dado['title'] ?>ﾠ<label class="ntfDate"><?php echo date('M/d | h:i A', strtotime($dado['date'])); ?></label></a>
 						</li>
+					<?php } } else { echo '<center>Não há notificações!</center>'; } ?>
 					</ul>
 				</div>
 			</div>

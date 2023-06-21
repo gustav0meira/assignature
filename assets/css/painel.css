@@ -44,3 +44,76 @@
 	margin-bottom: -3px;
 	margin-right: 10px;
 }
+
+.userPP{
+	width: 100%;
+	padding-bottom: 100%;
+	border-radius: 15px;
+	background-size: cover !important;
+	background-position: center center !important;
+	background-color: white !important;
+}
+
+label.userTitle{
+	font-size: 0.9rem !important;
+}
+
+label.userDesc{
+	font-size: 0.7rem !important;
+	color: #FFFFFF40;
+}
+
+img.co{
+	width: 15px;
+	margin-left: 2px;
+}
+
+.account{
+	padding: 10px;
+	border-radius: 15px;
+}
+
+.accountPP{
+	width: 100%;
+	border-radius: 15px;
+}
+
+table{
+	margin-bottom: 0px !important;
+}
+
+td, th, tr{
+	background: transparent !important;
+	border: none !important;
+	color: white !important;
+	font-weight: 300 !important;
+	font-size: 0.8rem !important;
+	color: #FFFFFF90;
+}
+
+th{
+	font-weight: 400 !important;
+	color: #FFFFFF50 !important;
+}
+
+button.viewMore{
+	padding: 2px;
+	border-radius: 10px;
+	font-size: 0.7rem;
+	margin-top: 20px;
+	color: #FFFFFF40;
+	border: 1px solid #FFFFFF40;
+	background: transparent;
+	width: 13%;
+}
+
+.supPP{
+	width: 20px;
+	border-radius: 5px;
+	margin-right: 8px;
+}
+
+.supIcon{
+	width: 15px;
+	margin-left: 5px;
+}

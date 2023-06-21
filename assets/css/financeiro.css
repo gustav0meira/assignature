@@ -1,0 +1,101 @@
+body{
+	overflow: hidden;
+}
+table .fa-clock{
+	color: #ff9548 !important;
+}
+.fa-circle-check{
+	color: #88ff88 !important;
+}
+.fa-thumbs-up{
+	color: #88ff88 !important;
+}
+.fa-thumbs-down{
+	color: #ff9548 !important;
+}
+.iconsTd svg{
+	margin-left: 15px;
+}
+button.addButt{
+	padding: 5px 10px 5px 10px;
+	margin-bottom: 15px;
+	margin-right: 10px;
+	font-size: 0.8rem !important;
+	border-radius: 10px;
+	background: #8774E1;
+	color: white;
+	border: none;
+}
+.sidebarNewFature{
+	height: 100vh;
+	position: absolute;
+	z-index: 5 !important;
+	background: #18191a;
+	width: 300px;
+	right: -300px;
+	top: 0;
+	transition: all 0.4s;
+}
+.sideOpenBar{
+	right: 0;
+}
+.sideContent{
+	padding: 40px;
+	padding-top: 20px;
+}
+.sideContent option{
+	color: #18191a !important;
+}
+.sideContent input,
+.sideContent select,
+.sideContent textarea{
+	width: 100%;
+	padding: 10px;
+	border-radius: 15px;
+	background: transparent;
+	border: 1px solid #FFFFFF20;
+	color: #FFFFFF90;
+	font-weight: 300 !important;
+	font-size: 0.8rem;
+}
+.sideContent input::placeholder{
+	color: #FFFFFF30 !important;
+}
+.sideContent label{
+	font-size: 0.6rem;
+	position: relative;
+	bottom: -13px;
+	color: #FFFFFF80;
+	margin-left: 10px;
+	padding: 5px;
+	background: #18191a;
+}
+
+.sideContent p.title{
+	font-size: 1rem !important;
+}
+
+.sideContent p.desc{
+	font-size: 0.8rem !important;
+	margin-bottom: 5px !important;
+	color: #FFFFFF70;
+}
+
+.sideContent button.save{
+	width: 100%;
+	color: white;
+	border: none;
+	padding: 10px;
+	margin-top: 20px;
+	border-radius: 15px;
+	background: #8774E1;
+	font-size: 0.8rem !important;
+}
+
+.sideContent .sideIcon{
+	padding: 13px 15px 13px 15px;
+	border-radius: 15px;
+	background: #8774E1;
+	color: white;
+	font-size: 0.8rem !important;
+}

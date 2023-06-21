@@ -1,8 +1,9 @@
 <?php 
-require "../../config/vars.php";
+session_start();
 require "../../config/sql.php";
+require "../../config/vars.php";
 
-session_start(); verifyAuth();
+verifyAuth();
 $user = catchUser($_SESSION['id'], $conn);
 
 require "../../config/cdn.php";

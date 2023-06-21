@@ -1,85 +1,229 @@
-<?php 
-require "../../config/vars.php";
+<?php
+session_start();
 require "../../config/sql.php";
+require "../../config/vars.php";
 
-session_start(); verifyAuth();
+verifyAuth();
 $user = catchUser($_SESSION['id'], $conn);
 
 require "../../config/cdn.php";
 require "../../config/leftbar.php";
+
+// Consulta para obter o total de receita
+$sqlReceita = "SELECT SUM(bank_amount) AS total_receita FROM bank_accounts WHERE status = 'ativo'";
+$resultReceita = mysqli_query($conn, $sqlReceita);
+$rowReceita = mysqli_fetch_assoc($resultReceita);
+$totalReceita = $rowReceita['total_receita'];
+
+// Consulta para obter o número de projetos ativos
+$sqlProjetos = "SELECT COUNT(*) AS total_projetos FROM projects WHERE status = 'ativo'";
+$resultProjetos = mysqli_query($conn, $sqlProjetos);
+$rowProjetos = mysqli_fetch_assoc($resultProjetos);
+$totalProjetos = $rowProjetos['total_projetos'];
+
+// Consulta para obter o número de clientes ativos
+$sqlClientes = "SELECT COUNT(*) AS total_clientes FROM clients WHERE status = 'ativo'";
+$resultClientes = mysqli_query($conn, $sqlClientes);
+$rowClientes = mysqli_fetch_assoc($resultClientes);
+$totalClientes = $rowClientes['total_clientes'];
+
+// Consulta para obter o total de horas trabalhadas em todos os projetos
+$sqlTimeReport = "SELECT SUM(hours) AS total_horas FROM time_report";
+$resultTimeReport = mysqli_query($conn, $sqlTimeReport);
+$rowTimeReport = mysqli_fetch_assoc($resultTimeReport);
+$totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeReport['total_horas'], 2));
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="../../assets/css/painel.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/painel.css">
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="module">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa-solid fa-dollar item-module align"></i>
+                        </div>
+                        <div class="col-sm">
+                            <label class="submoduleTitle">Receita</label><br>
+                            <label class="submoduleDesc"><?php echo 'R$ ' . number_format($totalReceita, 2, ',', '.'); ?></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="module">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa-solid fa-file item-module align"></i>
+                        </div>
+                        <div class="col-sm">
+                            <label class="submoduleTitle">Projetos</label><br>
+                            <label class="submoduleDesc"><?php echo $totalProjetos; ?></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="module">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa-solid fa-user item-module align"></i>
+                        </div>
+                        <div class="col-sm">
+                            <label class="submoduleTitle">Clientes</label><br>
+                            <label class="submoduleDesc"><?php echo $totalClientes; ?></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="module">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa-solid fa-clock item-module align"></i>
+                        </div>
+                        <div class="col-sm">
+                            <label class="submoduleTitle">Time Report</label><br>
+                            <label class="submoduleDesc"><?php echo $totalHoras; ?></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <h1 class="moduleTitle">#projetos</h1>
 				<div class="module">
-					<div class="row">
-						<div class="col-4">
-							<i class="fa-solid fa-pen-nib item-module align"></i>
-						</div>
-						<div class="col-sm">
-							<label class="submoduleTitle">Assinaturas</label><br>
-							<label class="submoduleDesc">0</label>
-						</div>
-					</div>
+				    <div class="row">
+						<table class="table">
+						  <thead>
+						    <tr>
+						      <th style="padding-left: 20px;" scope="col">#</th>
+						      <th scope="col">Título</th>
+						      <th scope="col">Briefing</th>
+						      <th scope="col">Supervisor</th>
+						      <th scope="col">Prazo</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+							<?php
+							setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+							date_default_timezone_set('America/Sao_Paulo');
+							$consulta = "SELECT * FROM projects WHERE status = 'ativo' LIMIT 5";
+							$con = $conn->query($consulta) or die($conn->error);
+
+							if (mysqli_num_rows($con) > 0) {
+							while($dado = $con->fetch_array()) { ?>
+							<?php $prazo = strtotime($dado['end_date']) - strtotime(date('Y-m-d')); $prazo = round($prazo / (60 * 60 * 24)); ?>
+						    <tr>
+								<th style="padding-left: 20px;">#<?php echo $dado['id'] ?></th>
+								<td><?php echo $dado['name'] ?></td>
+								<td><?php echo $dado['description'] ?></td>
+								<?php $supId = $dado['supervisor']; $query = "SELECT * FROM users WHERE id = '$supId'";
+								$responseQuery = mysqli_query($conn, $query);
+								while ($super = mysqli_fetch_array($responseQuery)) {$supervisor = $super;}; ?>
+								<td>
+									<img class="supPP" src="../../assets/pp/<?php echo $supervisor['pp']; ?>"> 
+									<label><?php echo ucfirst($supervisor['username']); ?></label>
+									<img class="supIcon" src="../../assets/icons/<?php echo $supervisor['job_function']; ?>.png">
+								</td>
+								<td><?php echo $prazo ?> dias</td>
+						    </tr>
+							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
+						  </tbody>
+						</table>
+				        <?php if (mysqli_num_rows($con) > 0) { ?>
+				        <center><button onclick="window.location.href='../projetos/'" class="viewMore">Ver Mais</button></center>
+				        <?php } ?>
+				    </div>
 				</div>
-			</div>
-			<div class="col-3">
+                <h1 class="moduleTitle">#clientes</h1>
 				<div class="module">
-					<div class="row">
-						<div class="col-4">
-							<i class="fa-solid fa-user item-module align"></i>
-						</div>
-						<div class="col-sm">
-							<label class="submoduleTitle">Clientes</label><br>
-							<label class="submoduleDesc">0</label>
-						</div>
-					</div>
+				    <div class="row">
+						<table class="table">
+						  <thead>
+						    <tr>
+						      <th style="padding-left: 20px;" scope="col">#</th>
+						      <th scope="col">Nome</th>
+						      <th scope="col">E-mail</th>
+						      <th scope="col">Telefone</th>
+						      <th scope="col">Supervisor</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+							<?php
+							setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+							date_default_timezone_set('America/Sao_Paulo');
+							$consulta = "SELECT * FROM clients WHERE status = 'ativo' LIMIT 5";
+							$con = $conn->query($consulta) or die($conn->error);
+
+							if (mysqli_num_rows($con) > 0) {
+							while($dado = $con->fetch_array()) { ?>
+						    <tr>
+								<th style="padding-left: 20px;">#<?php echo $dado['id'] ?></th>
+								<td><?php echo $dado['name'] . ' ' . $dado['surname'] ?></td>
+								<td><?php echo $dado['email'] ?></td>
+								<td><?php echo $dado['phone'] ?></td>
+								<?php $supId = $dado['id_supervisor']; $query = "SELECT * FROM users WHERE id = '$supId'";
+								$responseQuery = mysqli_query($conn, $query);
+								while ($super = mysqli_fetch_array($responseQuery)) {$supervisor = $super;}; ?>
+								<td>
+									<img class="supPP" src="../../assets/pp/<?php echo $supervisor['pp']; ?>"> 
+									<label><?php echo ucfirst($supervisor['username']); ?></label>
+									<img class="supIcon" src="../../assets/icons/<?php echo $supervisor['job_function']; ?>.png">
+								</td>
+						    </tr>
+							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
+						  </tbody>
+						</table>
+				        <?php if (mysqli_num_rows($con) > 0) { ?>
+				        <center><button onclick="window.location.href='../clientes/'" class="viewMore">Ver Mais</button></center>
+				        <?php } ?>
+				    </div>
 				</div>
-			</div>
-			<div class="col-3">
-				<div class="module">
-					<div class="row">
-						<div class="col-4">
-							<i class="fa-solid fa-user item-module align"></i>
-						</div>
-						<div class="col-sm">
-							<label class="submoduleTitle">Clientes</label><br>
-							<label class="submoduleDesc">0</label>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="module">
-					<div class="row">
-						<div class="col-4">
-							<i class="fa-solid fa-user item-module align"></i>
-						</div>
-						<div class="col-sm">
-							<label class="submoduleTitle">Clientes</label><br>
-							<label class="submoduleDesc">0</label>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12">
-				<h1 class="moduleTitle">#contratos</h1>
-				<div class="module">
-					<div class="row">
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="col-4">
+                <h1 class="moduleTitle">#contas</h1>
+			    <?php
+			    $sql = "SELECT * FROM bank_accounts WHERE status = 'ativo'";
+			    $result = mysqli_query($conn, $sql);
+				if (mysqli_num_rows($result) > 0) {
+				while ($row = mysqli_fetch_assoc($result)) { ?>
+				<div style="padding: 0px !important; margin-bottom: 15px !important;" class="module"><div class="row"><div class="col-3">
+				<div style="background: url('<?php echo $row['bank_pp']; ?>');" class="userPP"></div></div>
+				<div class="col-sm"><div class="align">
+				<label class="userDesc"><?php echo $row['bank_name']; ?></label><br>
+				<label class="userTitle"><?php echo 'R$ ' . number_format($row['bank_amount'], 2, ',', '.'); ?></label>
+				</div></div></div></div>
+				<?php } } else { echo "Nenhuma conta encontrada."; } mysqli_free_result($result); ?>
+
+                <h1 style="margin-top: 30px;" class="moduleTitle">#usuarios-online</h1>
+			    <?php
+			    $sql = "SELECT * FROM users WHERE status != 'arquivado'";
+			    $result = mysqli_query($conn, $sql);
+				if (mysqli_num_rows($result) > 0) {
+				while ($row = mysqli_fetch_assoc($result)) {
+				$username = ucfirst($row['username']);
+				$name = $row['name'];
+				$surname = $row['surname'];
+				$job_function = $row['job_function'];
+				$profilePicture = $row['pp'];
+				$last_login = date('H:i', strtotime($row['last_login'])); ?>
+				<div style="padding: 0px !important; margin-bottom: 15px !important;" class="module"><div class="row"><div class="col-3">
+				<div style="background: url('../../assets/pp/<?php echo $profilePicture; ?>');" class="userPP"></div></div>
+				<div class="col-sm"><div class="align">
+				<label class="userTitle">Sir <?php echo $username; ?> <img class="co" src="../../assets/icons/<?php echo $job_function; ?>.png"></label><br>
+				<label class="userDesc"><?php echo $name . ' ' . $surname . ' | ' . $last_login; ?></label>
+				</div></div></div></div>
+				<?php } } else { echo "Nenhum usuário encontrado."; } mysqli_free_result($result); ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

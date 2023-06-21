@@ -17,4 +17,4 @@ function maskPhone($phoneNumber) {
   return $mask;
 }
 
- ?>
+?>

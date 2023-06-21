@@ -3,7 +3,12 @@
 	// =============== VARS
 	// app
 	$appName = 'The Circle';
-	$notifyCount = 9;
+	$userId = $_SESSION['id'];
+	$sqlCount = "SELECT COUNT(*) AS notifyCount FROM notifications WHERE id = '$userId'";
+	$resultCount = mysqli_query($conn, $sqlCount);
+	$rowCount = mysqli_fetch_assoc($resultCount);
+	$notifyCount = $rowCount['notifyCount'];
+
 	$domain = $_SERVER['HTTP_HOST'];
 	$url = isset($_GET['url']) ? $_GET['url'] : '';
 	$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
@@ -51,6 +56,11 @@ border: 3px solid #414548;
 	padding: 0px !important;
 	border: none !important;
 }
+.align{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
 p.v{
 	position: absolute;
 	left: 50%;
@@ -71,7 +81,7 @@ p.v{
 <?php if ($notifyCount >= 1) { echo '<link rel="icon" type="image/x-icon" href="assets/favicon/1.png">'; } ?>
 
 <!-- ================  copyright  ================ -->
-<style>p.copy{ position:fixed; color: #FFFFFF10; bottom: 5; cursor: default; font-size:0.5rem; font-family:Poppins; left:50%; transform:translateX(-50%); }</style>
+<style>p.copy{ position:fixed; color: #FFFFFF10; bottom: -5; cursor: default; font-size:0.5rem; font-family:Poppins; left:50%; transform:translateX(-50%); }</style>
 <p class="copy">Todos os direitos reservados à The Circle ©</p>
 
 
