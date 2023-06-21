@@ -84,10 +84,6 @@ p.v{
 <link rel="icon" type="image/x-icon" href="../../assets/favicon/0.png">
 <?php if ($notifyCount >= 1) { echo '<link rel="icon" type="image/x-icon" href="assets/favicon/1.png">'; } ?>
 
-<!-- ================  copyright  ================ -->
-<style>p.copy{ position:fixed; color: #FFFFFF10; bottom: -5; cursor: default; font-size:0.5rem; font-family:Poppins; left:50%; transform:translateX(-50%); }</style>
-<p class="copy">Todos os direitos reservados à The Circle ©</p>
-
 
 <?php // ======== FUNCTIONS ================== 
 

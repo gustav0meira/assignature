@@ -178,7 +178,7 @@ $totaldespesa = $rowdespesa['total_despesa'];
     </div>
 </body>
 <div id="sidebarNewFature" class="sidebarNewFature">
-	<div class="sideContent">
+	<div class="sideFinanContent">
 		<form method="POST" action="./newFature.php">
 			<label>Título:</label>
 			<input required placeholder="Insira aqui o título" type="text" name="name"><br>

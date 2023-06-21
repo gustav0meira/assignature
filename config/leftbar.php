@@ -2,7 +2,7 @@
 	body{
 		margin: 0px !important;
 		background-color: #454648 !important;
-		padding: 60px 50px 0px calc(18vw + 50px) !important;
+		padding: 60px 50px 50px calc(18vw + 50px) !important;
 		color: white !important;
 		font-family: Poppins !important;
 		font-weight: 300 !important;
@@ -166,7 +166,7 @@
 			</div>
 		</a>
 
-		<a href="<?php echo routeLink('contratos'); ?>">
+		<a href="<?php echo routeLink('projetos'); ?>">
 			<div class="leftLink">
 				<div class="row">
 					<div class="col-3">

@@ -98,51 +98,6 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
                 </div>
             </div>
             <div class="col-8">
-                <h1 class="moduleTitle">#projetos</h1>
-				<div class="module">
-				    <div class="row">
-						<table class="table">
-						  <thead>
-						    <tr>
-						      <th style="padding-left: 20px;" scope="col">#</th>
-						      <th scope="col">Título</th>
-						      <th scope="col">Briefing</th>
-						      <th scope="col">Supervisor</th>
-						      <th scope="col">Prazo</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-							<?php
-							setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-							date_default_timezone_set('America/Sao_Paulo');
-							$consulta = "SELECT * FROM projects WHERE status = 'ativo' LIMIT 5";
-							$con = $conn->query($consulta) or die($conn->error);
-
-							if (mysqli_num_rows($con) > 0) {
-							while($dado = $con->fetch_array()) { ?>
-							<?php $prazo = strtotime($dado['end_date']) - strtotime(date('Y-m-d')); $prazo = round($prazo / (60 * 60 * 24)); ?>
-						    <tr>
-								<th style="padding-left: 20px;">#<?php echo $dado['id'] ?></th>
-								<td><?php echo $dado['name'] ?></td>
-								<td><?php echo $dado['description'] ?></td>
-								<?php $supId = $dado['supervisor']; $query = "SELECT * FROM users WHERE id = '$supId'";
-								$responseQuery = mysqli_query($conn, $query);
-								while ($super = mysqli_fetch_array($responseQuery)) {$supervisor = $super;}; ?>
-								<td>
-									<img class="supPP" src="../../assets/pp/<?php echo $supervisor['pp']; ?>"> 
-									<label><?php echo ucfirst($supervisor['username']); ?></label>
-									<img class="supIcon" src="../../assets/icons/<?php echo $supervisor['job_function']; ?>.png">
-								</td>
-								<td><?php echo $prazo ?> dias</td>
-						    </tr>
-							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
-						  </tbody>
-						</table>
-				        <?php if (mysqli_num_rows($con) > 0) { ?>
-				        <center><button onclick="window.location.href='../projetos/'" class="viewMore">Ver Mais</button></center>
-				        <?php } ?>
-				    </div>
-				</div>
                 <h1 class="moduleTitle">#clientes</h1>
 				<div class="module">
 				    <div class="row">
@@ -152,7 +107,6 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 						      <th style="padding-left: 20px;" scope="col">#</th>
 						      <th scope="col">Nome</th>
 						      <th scope="col">E-mail</th>
-						      <th scope="col">Telefone</th>
 						      <th scope="col">Supervisor</th>
 						    </tr>
 						  </thead>
@@ -169,7 +123,6 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 								<th style="padding-left: 20px;">#<?php echo $dado['id'] ?></th>
 								<td><?php echo $dado['name'] . ' ' . $dado['surname'] ?></td>
 								<td><?php echo $dado['email'] ?></td>
-								<td><?php echo $dado['phone'] ?></td>
 								<?php $supId = $dado['id_supervisor']; $query = "SELECT * FROM users WHERE id = '$supId'";
 								$responseQuery = mysqli_query($conn, $query);
 								while ($super = mysqli_fetch_array($responseQuery)) {$supervisor = $super;}; ?>
@@ -184,6 +137,42 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 						</table>
 				        <?php if (mysqli_num_rows($con) > 0) { ?>
 				        <center><button onclick="window.location.href='../clientes/'" class="viewMore">Ver Mais</button></center>
+				        <?php } ?>
+				    </div>
+				</div>
+                <h1 class="moduleTitle">#projetos</h1>
+				<div class="module">
+				    <div class="row">
+						<table class="table">
+						  <thead>
+						    <tr>
+						      <th style="padding-left: 20px;" scope="col">#</th>
+						      <th scope="col">Título</th>
+						      <th scope="col">Briefing</th>
+						      <th scope="col">Prazo</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+							<?php
+							setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+							date_default_timezone_set('America/Sao_Paulo');
+							$consulta = "SELECT * FROM projects WHERE status = 'ativo' LIMIT 5";
+							$con = $conn->query($consulta) or die($conn->error);
+
+							if (mysqli_num_rows($con) > 0) {
+							while($dado = $con->fetch_array()) { ?>
+							<?php $prazo = strtotime($dado['end_date']) - strtotime(date('Y-m-d')); $prazo = round($prazo / (60 * 60 * 24)); ?>
+						    <tr>
+								<th style="padding-left: 20px;">#<?php echo $dado['id'] ?></th>
+								<td><?php echo $dado['name'] ?></td>
+								<td><?php echo substr($dado['description'], 0, 30) ?>...</td>
+								<td><?php echo $prazo ?> dias</td>
+						    </tr>
+							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
+						  </tbody>
+						</table>
+				        <?php if (mysqli_num_rows($con) > 0) { ?>
+				        <center><button onclick="window.location.href='../projetos/'" class="viewMore">Ver Mais</button></center>
 				        <?php } ?>
 				    </div>
 				</div>

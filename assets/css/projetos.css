@@ -1,21 +1,20 @@
 body{
 	overflow: hidden;
 }
-table .fa-clock{
-	color: #ff9548 !important;
+
+.tdIcon{
+	text-align: right !important;
+	padding-right: 25px !important;
 }
-.fa-circle-check{
-	color: #88ff88 !important;
+
+.tdIcon a{
+	color: white !important;
 }
-.fa-thumbs-up{
-	color: #88ff88 !important;
+
+.tdIcon svg{
+	margin-left: 10px;
 }
-.fa-thumbs-down{
-	color: #ff9548 !important;
-}
-.iconsTd svg{
-	margin-left: 15px;
-}
+
 button.addButt{
 	padding: 5px 10px 5px 10px;
 	margin-bottom: 15px;
@@ -26,6 +25,7 @@ button.addButt{
 	color: white;
 	border: none;
 }
+
 .sidebarNewFature{
 	height: 100vh;
 	position: absolute;
