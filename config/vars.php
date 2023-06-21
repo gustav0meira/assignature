@@ -3,11 +3,15 @@
 	// =============== VARS
 	// app
 	$appName = 'The Circle';
+	if (isset($_SESSION['id'])) {
 	$userId = $_SESSION['id'];
 	$sqlCount = "SELECT COUNT(*) AS notifyCount FROM notifications WHERE id = '$userId'";
 	$resultCount = mysqli_query($conn, $sqlCount);
 	$rowCount = mysqli_fetch_assoc($resultCount);
 	$notifyCount = $rowCount['notifyCount'];
+	}else{
+	$notifyCount = 0;	
+	}
 
 	$domain = $_SERVER['HTTP_HOST'];
 	$url = isset($_GET['url']) ? $_GET['url'] : '';
@@ -128,20 +132,6 @@ function planById($id, $conn) {
     }
 
     return $plan;
-}
-
-function login($email, $password, $conn) {
-	$password = hash('sha256', $password);
-
-    $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
-	$result = mysqli_query($conn, $query); $user = mysqli_fetch_assoc($result);
-
-    if (mysqli_num_rows($result) === 1) {
-    	session_start(); $_SESSION['id'] = $user['id']; route('painel');
-    } else {
-        $error = "E-mail ou senha inválidos.";
-    }
-
 }
 
 function catchUser($id, $conn) {
