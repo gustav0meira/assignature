@@ -1,3 +1,4 @@
+<title>Login | The Circle</title>
 <?php 
 require "../../config/sql.php";
 require "../../config/vars.php";
