@@ -1,6 +1,6 @@
 <?php 
-require "../../config/vars.php";
 require "../../config/sql.php";
+require "../../config/vars.php";
 require "../../config/cdn.php";
 ?>
 
