@@ -45,23 +45,28 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-3">
+        	<?php $username = $user['username'];
+			if ($username == 'lancelot' OR $username == 'arthur') {
+				echo '
+				 <div class="col-sm">
+				    <div class="module">
+				        <div class="row">
+				            <div class="col-3">
+				                <i class="fa-solid fa-dollar item-module align"></i>
+				            </div>
+				            <div class="col-sm">
+				                <label class="submoduleTitle">Receita</label><br>
+				                <label class="submoduleDesc">R$ ' . number_format($totalReceita, 2, ',', '.') . '</label>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+				';
+        	} ?>
+            <div class="col-sm">
                 <div class="module">
                     <div class="row">
-                        <div class="col-4">
-                            <i class="fa-solid fa-dollar item-module align"></i>
-                        </div>
-                        <div class="col-sm">
-                            <label class="submoduleTitle">Receita</label><br>
-                            <label class="submoduleDesc"><?php echo 'R$ ' . number_format($totalReceita, 2, ',', '.'); ?></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="module">
-                    <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <i class="fa-solid fa-file item-module align"></i>
                         </div>
                         <div class="col-sm">
@@ -71,10 +76,10 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-sm">
                 <div class="module">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <i class="fa-solid fa-user item-module align"></i>
                         </div>
                         <div class="col-sm">
@@ -84,10 +89,10 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-sm">
                 <div class="module">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <i class="fa-solid fa-clock item-module align"></i>
                         </div>
                         <div class="col-sm">
@@ -97,6 +102,8 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-8">
                 <h1 class="moduleTitle">#clientes</h1>
 				<div class="module">
@@ -135,12 +142,9 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
 						  </tbody>
 						</table>
-				        <?php if (mysqli_num_rows($con) > 0) { ?>
-				        <center><button onclick="window.location.href='../clientes/'" class="viewMore">Ver Mais</button></center>
-				        <?php } ?>
 				    </div>
 				</div>
-                <h1 class="moduleTitle">#projetos</h1>
+                <h1 style="margin-top: 30px !important;" class="moduleTitle">#projetos</h1>
 				<div class="module">
 				    <div class="row">
 						<table class="table">
@@ -171,9 +175,6 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
 						  </tbody>
 						</table>
-				        <?php if (mysqli_num_rows($con) > 0) { ?>
-				        <center><button onclick="window.location.href='../projetos/'" class="viewMore">Ver Mais</button></center>
-				        <?php } ?>
 				    </div>
 				</div>
             </div>
@@ -194,7 +195,7 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 
                 <h1 style="margin-top: 30px;" class="moduleTitle">#usuarios-online</h1>
 			    <?php
-			    $sql = "SELECT * FROM users WHERE status != 'arquivado'";
+			    $sql = "SELECT * FROM users WHERE status != 'arquivado' AND logged = 1";
 			    $result = mysqli_query($conn, $sql);
 				if (mysqli_num_rows($result) > 0) {
 				while ($row = mysqli_fetch_assoc($result)) {

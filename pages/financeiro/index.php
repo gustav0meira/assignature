@@ -5,6 +5,8 @@ require "../../config/vars.php";
 
 verifyAuth();
 $user = catchUser($_SESSION['id'], $conn);
+$username = $user['username'];
+if ($username == 'lancelot' OR $username == 'arthur') {} else { header('Location: ../painel/'); }
 
 require "../../config/cdn.php";
 require "../../config/leftbar.php";

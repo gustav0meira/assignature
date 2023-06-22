@@ -153,7 +153,10 @@
 			</div>
 		</a>
 
-		<a href="<?php echo routeLink('financeiro'); ?>">
+		<?php $username = $user['username'];
+		if ($username == 'lancelot' OR $username == 'arthur') {
+		echo '
+		<a href="'.routeLink("financeiro").'">
 			<div class="leftLink">
 				<div class="row">
 					<div class="col-3">
@@ -165,6 +168,7 @@
 				</div>
 			</div>
 		</a>
+		'; } ?>
 
 		<a href="<?php echo routeLink('projetos'); ?>">
 			<div class="leftLink">
@@ -192,6 +196,9 @@
 			</div>
 		</a>
 
+		<?php $username = $user['username'];
+		if ($username == 'lancelot' OR $username == 'arthur') {
+		echo '
 		<a id="buttonsideAtive">
 			<div class="leftLink">
 				<div class="row">
@@ -204,6 +211,7 @@
 				</div>
 			</div>
 		</a>
+		'; } ?>
 
 	</div>
 </div>
