@@ -178,7 +178,7 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 				    </div>
 				</div>
             </div>
-            <div class="col-4">
+            <div style="padding-left: 30px !important;" class="col-4">
                 <h1 class="moduleTitle">#contas</h1>
 			    <?php
 			    $sql = "SELECT * FROM bank_accounts WHERE status = 'ativo'";

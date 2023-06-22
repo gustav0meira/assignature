@@ -97,9 +97,22 @@
 	}
 
 	.logo{
+
 		width: 40%;
 		margin-top: 10px;
 		margin-bottom: 10px;
+		transition: all 300ms;
+		animation: loading 60s linear infinite;
+	}
+
+	@keyframes loading {
+	    0% {
+	        transform: rotate(0)
+	    }
+
+	    100% {
+	        transform: rotate(360deg)
+	    }
 	}
 
 </style>
