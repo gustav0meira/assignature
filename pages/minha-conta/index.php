@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$pageName = str_replace('-', ' ', ucwords(basename(__DIR__)));
 require "../../config/sql.php";
 require "../../config/vars.php";
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pageName = str_replace('-', ' ', basename(__DIR__));
 require "../../config/sql.php";
 require "../../config/vars.php";
 
@@ -40,7 +41,12 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
     <div class="container projectsView">
         <div class="row">
         	<div class="col-3">
-        		<div style="background: url('../../assets/clients/<?php echo $client['pp'] ?>');" class="clientPP"></div>
+				<div onclick="abrirCampoArquivo()" style="background: url('../../assets/clients/<?php echo $client['pp']; ?>');" class="clientPP"></div>
+				<form method="POST" enctype="multipart/form-data" action="newPP.php" id="formPP">
+					<input required type="file" name="pp" id="pp" style="display: none !important;">
+					<input required type="hidden" value="<?php echo $client['name'] ?>" name="name">
+					<input required type="hidden" value="<?php echo $client['id'] ?>" name="id">
+				</form>
 
 				<h1 style="margin-top: 30px;" class="moduleTitle">#supervisor</h1>
 				<?php 
@@ -220,4 +226,28 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
         </div>
     </div>
 </body>
+<script>
+function submitPasswordForm() {
+  const senhaInput = document.getElementById('password');
+  const senhaHiddenInput = document.getElementById('senhaHidden');
+  senhaHiddenInput.value = senhaInput.value;
+  document.getElementById('updatePassword').submit();
+}
+</script>
+<script>
+function abrirCampoArquivo() {
+  document.getElementById('pp').addEventListener('change', function() {
+    document.getElementById('formPP').submit();
+  });
+  document.getElementById('pp').click();
+}
+</script>
+<script>
+$(document).ready(function() {
+  $('#cpf').inputmask();
+});
+$(document).ready(function() {
+  $('#telefone').inputmask();
+});
+</script>
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pageName = str_replace('-', ' ', ucwords(basename(__DIR__)));
 require "../../config/sql.php";
 require "../../config/vars.php";
 
@@ -115,6 +116,7 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 						      <th scope="col">Nome</th>
 						      <th scope="col">E-mail</th>
 						      <th scope="col">Supervisor</th>
+						      <th scope="col"></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -138,6 +140,7 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 									<label><?php echo ucfirst($supervisor['username']); ?></label>
 									<img class="supIcon" src="../../assets/icons/<?php echo $supervisor['job_function']; ?>.png">
 								</td>
+								<td><a style="color: #FFFFFF40;" href="../client-view/?id=<?php echo $dado['id'] ?>"><i class="fa-regular fa-eye"></i></a></td>
 						    </tr>
 							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
 						  </tbody>
@@ -154,6 +157,7 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 						      <th scope="col">Título</th>
 						      <th scope="col">Briefing</th>
 						      <th scope="col">Prazo</th>
+						      <th scope="col"></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -171,6 +175,7 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 								<td><?php echo $dado['name'] ?></td>
 								<td><?php echo substr($dado['description'], 0, 30) ?>...</td>
 								<td><?php echo $prazo ?> dias</td>
+								<td><a style="color: #FFFFFF30;" href="../project-view/?id=<?php echo $dado['id'] ?>"><i class="fa-regular fa-eye"></i></a></td>
 						    </tr>
 							<?php } } else { echo '<center>Não há nenhum projeto cadastrado!</center>'; } ?>
 						  </tbody>
@@ -199,18 +204,21 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 			    $result = mysqli_query($conn, $sql);
 				if (mysqli_num_rows($result) > 0) {
 				while ($row = mysqli_fetch_assoc($result)) {
+				$id = $row['id'];
 				$username = ucfirst($row['username']);
 				$name = $row['name'];
 				$surname = $row['surname'];
 				$job_function = $row['job_function'];
 				$profilePicture = $row['pp'];
 				$last_login = date('H:i', strtotime($row['last_login'])); ?>
+				<a style="color: white;" href="../user-view/?id=<?php echo $id ?>">
 				<div style="padding: 0px !important; margin-bottom: 15px !important;" class="module"><div class="row"><div class="col-3">
 				<div style="background: url('../../assets/pp/<?php echo $profilePicture; ?>');" class="userPP"></div></div>
 				<div class="col-sm"><div class="align">
 				<label class="userTitle">Sir <?php echo $username; ?> <img class="co" src="../../assets/icons/<?php echo $job_function; ?>.png"></label><br>
 				<label class="userDesc"><?php echo $name . ' ' . $surname . ' | ' . $last_login; ?></label>
 				</div></div></div></div>
+				</a>
 				<?php } } else { echo "Nenhum usuário encontrado."; } mysqli_free_result($result); ?>
             </div>
         </div>

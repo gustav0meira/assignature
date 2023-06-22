@@ -80,7 +80,7 @@ p.v{
 }
 </style>
 
-<title><?php if($notifyCount > 0){echo '('.$notifyCount.') ';} ?> <?php echo ucfirst($url) . ' | ' . $appName ?></title>
+<title><?php if($notifyCount > 0){echo '('.$notifyCount.') ';} ?> <?php echo ucwords($pageName) . ' | ' . $appName ?></title>
 
 <!-- =================  favicon  ================= -->
 <link rel="icon" type="image/x-icon" href="assets/favicon/0.png">

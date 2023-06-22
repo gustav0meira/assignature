@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pageName = str_replace('-', ' ', ucwords(basename(__DIR__)));
 require "../../config/sql.php";
 require "../../config/vars.php";
 
@@ -93,6 +94,7 @@ $totalClientsEsclusive = $rowClientsEsclusive['total'];
 						    <tr>
 						      <th style="padding-left: 20px;" scope="col">#</th>
 						      <th scope="col"></th>
+						      <th scope="col"></th>
 						      <th scope="col">Nome</th>
 						      <th scope="col">E-mail</th>
 						      <th scope="col">Telefone</th>
@@ -112,6 +114,9 @@ $totalClientsEsclusive = $rowClientsEsclusive['total'];
 						    <tr>
 								<th style="padding-left: 20px;">#<?php echo $dado['id'] ?></th>
 								<td><img width="20px" src="../../assets/icons/<?php echo $dado['plan'] ?>"></td>
+								<td>
+									<img style="width: 30px; margin-top: -7px; border-radius: 10px;" src="../../assets/clients/<?php echo $dado['pp'] ?>">
+								</td>
 								<td><?php echo $dado['name'] . ' ' . $dado['surname'] ?></td>
 								<td><?php echo $dado['email'] ?></td>
 								<td><?php echo $dado['phone'] ?></td>

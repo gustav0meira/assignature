@@ -290,6 +290,28 @@
 
 		<hr>
 
+	    <a href="<?php echo routeLink('tasks'); ?>">
+	        <div class="row sideLink">
+	            <div class="col-2">
+	                <i class="fa-regular fa-square-check align"></i>
+	            </div>
+	            <div class="col-sm">
+	                <label>Tasks</label>
+	            </div>
+	        </div>
+	    </a>
+
+	    <a href="<?php echo routeLink('time-report'); ?>">
+	        <div class="row sideLink">
+	            <div class="col-2">
+	                <i class="fa-regular fa-clock align"></i>
+	            </div>
+	            <div class="col-sm">
+	                <label>Time Report</label>
+	            </div>
+	        </div>
+	    </a>
+
 	    <a href="<?php echo routeLink('auditoria'); ?>">
 	        <div class="row sideLink">
 	            <div class="col-2">

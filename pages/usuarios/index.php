@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pageName = str_replace('-', ' ', ucwords(basename(__DIR__)));
 require "../../config/sql.php";
 require "../../config/vars.php";
 
@@ -9,6 +10,7 @@ $user = catchUser($_SESSION['id'], $conn);
 require "../../config/masks.php";
 require "../../config/cdn.php";
 require "../../config/leftbar.php";
+
 
 // clientes
 $sqlClients = "SELECT COUNT(id) AS total FROM clients WHERE status = 'ativo'";
