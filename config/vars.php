@@ -83,8 +83,8 @@ p.v{
 <title><?php if($notifyCount > 0){echo '('.$notifyCount.') ';} ?> <?php echo ucfirst($url) . ' | ' . $appName ?></title>
 
 <!-- =================  favicon  ================= -->
-<link rel="icon" type="image/x-icon" href="assets/favicon/logo.png">
-<link rel="icon" type="image/x-icon" href="../../assets/favicon/logo.png">
+<link rel="icon" type="image/x-icon" href="assets/favicon/0.png">
+<link rel="icon" type="image/x-icon" href="../../assets/favicon/0.png">
 <?php if ($notifyCount >= 1) { echo '<link rel="icon" type="image/x-icon" href="assets/favicon/1.png">'; } ?>
 
 
