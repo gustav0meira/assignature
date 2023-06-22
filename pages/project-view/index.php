@@ -51,7 +51,7 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
 				<div style="padding: 0px !important; margin-bottom: 15px !important;" class="module">
 				   <div class="row">
 				      <div class="col-4">
-				         <div style="background: url('../../assets/pp/<?php echo $profilePicture; ?>');" class="userPP"></div>
+				         <div style="background: url('../../assets/clients/<?php echo $profilePicture; ?>');" class="userPP"></div>
 				      </div>
 				      <div class="col-sm">
 				         <div class="align">
@@ -115,7 +115,7 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
 	        				</div>
 	        				<div class="col-12">
 	        					<label class="input">Briefing</label>
-	        					<textarea name="description"><?php echo $project['description'] ?></textarea>
+	        					<textarea style="height: 100px !important;" name="description"><?php echo $project['description'] ?></textarea>
 	        				</div>
 	        			</div>
 	        		</div>

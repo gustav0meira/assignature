@@ -27,7 +27,7 @@ require "../../config/leftbar.php";
 				<div class="row">
 					<div class="col-12">
 						<div onclick="abrirCampoArquivo()" style="background: url('../../assets/pp/<?php echo $user['pp']; ?>');" class="pp"></div>
-						<form method="POST" enctype="multipart/form-data" action="<?php echo routeLink('newPP'); ?>" id="formPP">
+						<form method="POST" enctype="multipart/form-data" action="newPP.php" id="formPP">
 							<input required type="file" name="pp" id="pp" style="display: none !important;">
 							<input required type="hidden" value="<?php echo $user['username'] ?>" name="username">
 							<input required type="hidden" value="<?php echo $user['id'] ?>" name="id">
@@ -56,14 +56,14 @@ require "../../config/leftbar.php";
 								<label><i class="fa-solid fa-envelope"></i>ㅤ'.$mailMsg.'</label>
 							</div>
 							<div class="col-sm">
-								<a style="float: right;" href="'.routeLink("resendMail").'">Renviar e-mail</a>
+								<a style="float: right;" href="resendMail.php">Renviar e-mail</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				';
 			} ?>
-			<form id="updateInfo" method="POST" action="<?php echo routeLink('updateMinhaConta'); ?>">
+			<form id="updateInfo" method="POST" action="updateConta.php">
 				<div class="module">
 					<div class="row inputAccount">
 						<div class="col-4">
@@ -165,7 +165,7 @@ require "../../config/leftbar.php";
 		</div>
 	</div>
 </body>
-<form id="updatePassword" method="POST" action="<?php echo routeLink('updatePassword'); ?>">
+<form id="updatePassword" method="POST" action="updatePassword.php">
 <input pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" type="hidden" name="password" id="senhaHidden">
 </form>
 <script>

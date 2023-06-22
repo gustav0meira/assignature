@@ -9,6 +9,8 @@ $user = catchUser($_SESSION['id'], $conn);
 require "../../config/cdn.php";
 require "../../config/leftbar.php";
 
+error_reporting(0);
+
 // Consulta para obter o total de saldo
 $sqlReceita = "SELECT SUM(bank_amount) AS total_saldo FROM bank_accounts WHERE status = 'ativo'";
 $resultReceita = mysqli_query($conn, $sqlReceita);
@@ -16,13 +18,13 @@ $rowReceita = mysqli_fetch_assoc($resultReceita);
 $saldo = $rowReceita['total_saldo'];
 
 // Consulta para obter o total de receita
-$sqlReceita = "SELECT SUM(amount) AS total_receita FROM accounts_receivable WHERE status = 'ativo' AND type = 'receita'";
+$sqlReceita = "SELECT SUM(amount) AS total_receita FROM accounts_receivable WHERE status != 'arquivado' AND type = 'receita'";
 $resultReceita = mysqli_query($conn, $sqlReceita);
 $rowReceita = mysqli_fetch_assoc($resultReceita);
 $totalReceita = $rowReceita['total_receita'];
 
 // Consulta para obter o total de despesa
-$sqldespesa = "SELECT SUM(amount) AS total_despesa FROM accounts_receivable WHERE status = 'ativo' AND type = 'despesa'";
+$sqldespesa = "SELECT SUM(amount) AS total_despesa FROM accounts_receivable WHERE status != 'arquivado' AND type = 'despesa'";
 $resultdespesa = mysqli_query($conn, $sqldespesa);
 $rowdespesa = mysqli_fetch_assoc($resultdespesa);
 $totaldespesa = $rowdespesa['total_despesa'];
