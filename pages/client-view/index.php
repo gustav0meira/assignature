@@ -183,7 +183,7 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
 									<?php
 									setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 									date_default_timezone_set('America/Sao_Paulo');
-									$consulta = "SELECT * FROM projects WHERE status = 'ativo' ORDER BY end_date ASC LIMIT 5";
+									$consulta = "SELECT * FROM projects WHERE status = 'ativo' AND client_id = $clientId ORDER BY end_date ASC LIMIT 5";
 									$con = $conn->query($consulta) or die($conn->error);
 
 									if (mysqli_num_rows($con) > 0) {
