@@ -26,6 +26,9 @@
 
 <style>
 /* ===== Scrollbar CSS ===== */
+option{
+	color: black !important;
+}
 * {
 scrollbar-width: auto;
 scrollbar-color: #878787 #414548;
