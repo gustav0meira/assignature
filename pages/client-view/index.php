@@ -74,27 +74,10 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
 				   </div>
 				</div>
 				<?php } ?>
-
-				<h1 style="margin-top: 30px;" class="moduleTitle">#observações</h1>
-				<form method="POST" action="updateObs.php">
-					<textarea name="obs" style="height: 230px; background: #56585a;"><?php echo $client['obs'] ?></textarea>
-					<input type="hidden" value="<?php echo $client['id'] ?>" name="id">
-					<button class="send">ATUALIZAR</button>
-				</form>
         	</div>
         	<div class="col-9">
-				<form id="updateInfo" method="POST" action="updateClient.php">
-
-				<h1 style="margin-top: 30px;" class="moduleTitle">#observações</h1>
-				<form method="POST" action="updateObs.php">
-					<textarea name="obs" style="height: 230px; background: #56585a;"><?php echo $client['obs'] ?></textarea>
-					<input type="hidden" value="<?php echo $client['id'] ?>" name="id">
-					<button class="send">ATUALIZAR</button>
-				</form>
-        	</div>
-        	<div class="col-9">
-				<form id="updateInfo" method="POST" action="updateClient.php">
-    		<div class="module">
+			<form id="updateInfo" method="POST" action="updateClient.php">
+    			<div class="module">
 					<div class="row inputAccount">
 						<div class="col-4">
 							<label for="username">Usuário:</label><br>
