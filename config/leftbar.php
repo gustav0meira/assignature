@@ -411,7 +411,7 @@ document.addEventListener('click', function(event) {
 						<li id="listItem<?php echo $dado['id']; ?>" class="dropdown-item">
 							<div class="row">
 								<div class="col-10">
-									<a style="color: white; text-decoration: none" href="<?php echo routeLink('invoices'); ?>">
+									<a style="color: white; text-decoration: none" href="<?php echo routeLink($dado['link']); ?>">
 										 <?php echo $dado['icon'] . ' ' . $dado['title'] ?>ﾠ
 										<label class="ntfDate"><?php echo date('M/d | h:i A', strtotime($dado['date'])); ?></label>ﾠ
 									</a>
