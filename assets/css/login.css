@@ -64,8 +64,19 @@ button.register{
 }
 
 img.logo{
-	margin-bottom: 40px;
-	width: 30%;
+	margin-bottom: 50px;
+	width: 35%;
+	animation: loading 30s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
 }
 
 h1{
