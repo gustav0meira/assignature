@@ -124,13 +124,8 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 								</a>
 							</div>
 						</div>
-						<?php
-						$projeto = $dado['projeto'];
-						$query = "SELECT * FROM projects WHERE id = $projeto";
-						$queryRequest = mysqli_query($conn, $query);
-						while ($proj = mysqli_fetch_array($queryRequest)) { $projeto = $proj; } ?>
 						<div class="col-8">
-							<p class="align"><?php echo $dado['title'] ?> <label style="color: #FFFFFF30; font-weight: 200; font-size: 0.6rem;"> - <?php echo $projeto['name'] ?></label></p>
+							<p class="align"><?php echo $dado['title'] ?></p>
 						</div>
 						<div class="col-3">
 							<div class="align">
