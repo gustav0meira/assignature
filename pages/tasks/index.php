@@ -167,7 +167,7 @@ require "../../config/leftbar.php";
 						<div class="col-3">
 							<div class="row align">
 								<div class="col-3">
-						         	<div style="background: url('../../assets/client/<?php echo $client['pp']; ?>');" class="userPP"></div>
+						         	<div style="background: url('../../assets/clients/<?php echo $client['pp']; ?>');" class="userPP"></div>
 								</div>
 								<div class="col-sm">
 									<?php echo $projet['name']; ?>	
