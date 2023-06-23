@@ -97,6 +97,47 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
 					<input type="hidden" value="<?php echo $project['id'] ?>" name="id">
 					<button class="send">ATUALIZAR</button>
 				</form>
+
+				<div class="row">
+					<div class="col-6">
+						<h1 style="margin-top: 30px;" class="moduleTitle">#anexos</h1>
+					</div>
+					<div style="text-align: right;" class="col-6">
+						<a onclick="abrirCampoArquivo()">
+							<label style="margin-top: 30px; font-size: 0.8rem; color: #FFFFFF30; cursor: pointer;">(novo anexo)</label>
+							<form enctype="multipart/form-data" method="POST" id="formAnexo" action="./newAnexo.php">
+								<input required type="file" name="newAnexo" id="newAnexo" style="display: none !important;">
+								<input type="hidden" name="project_id" value="<?php echo $project['id'] ?>">
+							</form>
+						</a>
+					</div>
+				</div>
+				<?php 
+				$projectId = $project['id'];
+				$sql = "SELECT * FROM anexos WHERE project_id = $projectId";
+				$result = mysqli_query($conn, $sql);
+				while ($row = mysqli_fetch_assoc($result)) { ?>
+				<div style="padding: 0px !important; margin-top: 10px !important;" class="module">
+				   <div class="row">
+				      <div class="col-3">
+						<a style="color: white;" target="_blank" href="../../assets/anexos/<?php echo $row['local']; ?>">
+				        	<div style="background: url('../../assets/icons/file.png');" class="userPP"></div>
+						</a>
+				      </div>
+				      <div class="col-6">
+				         <div class="align">
+							<a style="color: white;" target="_blank" href="../../assets/anexos/<?php echo $row['local']; ?>">
+				            	<label style="cursor: pointer; font-size: 0.7rem !important" class="userTitle"><?php echo mb_strimwidth($row['name'], 0, 15, "..."); ?></label><br>
+				            	<label style="cursor: pointer" class="userDesc"><?php echo date('d/m/Y', strtotime($row['inserted'])); ?></label>
+							</a>
+				         </div>
+				      </div>
+				      <div style="text-align: right; !important;" class="col-2">
+						<a style="color: white;" href="./removeAnexo.php?id=<?php echo $row['id'] ?>&projId=<?php echo $project['id'] ?>"><i class="fa-regular fa-trash-can align"></i></a>
+				      </div>
+				   </div>
+				</div>
+				<?php } ?>
         	</div>
         	<div class="col-9">
         		<h1 style="margin-top: 0px;" class="moduleTitle">#projeto</h1>
@@ -109,7 +150,9 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
 	        					<input value="<?php echo $project['name'] ?>" type="text" name="title">
 	        				</div>
 	        				<div class="col-1">
-	        					<a target="_blank" href="<?php echo $project['link'] ?>"><button class="addButt"><i class="fa-solid fa-up-right-from-square"></i></button></a>
+	        					<a target="_blank" href="<?php echo $project['link'] ?>">
+	        						<button class="addButt"><i class="fa-solid fa-up-right-from-square"></i></button>
+	        					</a>
 	        				</div>
 	        				<div class="col-1">
 	        					<button form="project" class="addButt"><i class="fa-regular fa-floppy-disk"></i></button>
@@ -190,4 +233,12 @@ while ($clients = mysqli_fetch_array($queryRequest)) { $client = $clients; }
         </div>
     </div>
 </body>
+<script>
+function abrirCampoArquivo() {
+  document.getElementById('newAnexo').addEventListener('change', function() {
+    document.getElementById('formAnexo').submit();
+  });
+  document.getElementById('newAnexo').click();
+}
+</script>
 </html>
