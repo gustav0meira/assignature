@@ -106,6 +106,41 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
         </div>
         <div class="row">
             <div class="col-8">
+                <h1 class="moduleTitle">#tasks</h1>
+                <div class="module">
+                	<?php
+					$consulta = "SELECT * FROM tasks WHERE responsavel = $userId AND status = 0 LIMIT 5";
+					$con = $conn->query($consulta) or die($conn->error);
+					while($dado = $con->fetch_array()) { ?>
+	        		<div style="margin-bottom: 15px; margin-top: 15px; padding-left: 10px;" class="row task">
+						<div class="col-1">
+							<div class="align">
+								<a style="color: white !important; margin-right: 10px; text-decoration: none" href="./updateTask.php?id=<?php echo $dado['id'] ?>&projId=<?php echo $dado['projeto'] ?>&status=<?php echo $dado['status']; ?>">
+									<?php $status = $dado['status']; if ($status == 0) {
+										echo '<i class="fa-regular fa-square fa-lg"></i>';
+									} else{
+										echo '<i class="fa-solid fa-square-check fa-lg"></i>';
+									} ?>
+								</a>
+							</div>
+						</div>
+						<?php
+						$projeto = $dado['projeto'];
+						$query = "SELECT * FROM projects WHERE id = $projeto";
+						$queryRequest = mysqli_query($conn, $query);
+						while ($proj = mysqli_fetch_array($queryRequest)) { $projeto = $proj; } ?>
+						<div class="col-8">
+							<p class="align"><?php echo $dado['title'] ?> <label style="color: #FFFFFF30; font-weight: 200; font-size: 0.6rem;"> - <?php echo $projeto['name'] ?></label></p>
+						</div>
+						<div class="col-3">
+							<div class="align">
+								<input disabled class="prazoTasks" type="date" value="<?php echo $dado['prazo'] ?>" name="date">
+							</div>
+						</div>
+					</div>
+					<?php } ?>
+                </div>
+
                 <h1 class="moduleTitle">#clientes</h1>
 				<div class="module">
 				    <div class="row">
