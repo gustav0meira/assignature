@@ -106,7 +106,7 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
         </div>
         <div class="row">
             <div class="col-8">
-                <h1 class="moduleTitle">#tasks</h1>
+                <h1 class="moduleTitle">#tasks <a href="../tasks/"><label style="color: #FFFFFF30; font-weight: 200; font-size: 0.9rem; cursor: pointer;">(ver tudo)</label></a></h1>
                 <div class="module">
                 	<?php
 					$consulta = "SELECT * FROM tasks WHERE responsavel = $userId AND status = 0 LIMIT 5";
@@ -219,24 +219,31 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 				</div>
             </div>
             <div style="padding-left: 30px !important;" class="col-4">
-                <h1 class="moduleTitle">#contas</h1>
-			    <?php
-			    $sql = "SELECT * FROM bank_accounts WHERE status = 'ativo'";
-			    $result = mysqli_query($conn, $sql);
+				<h1 <?php if($user['username'] == 'lancelot' OR $user['username'] == 'arthur'){}else{echo 'style="display: none !important;"';} ?> class="moduleTitle">#contas</h1>
+				<?php
+				$sql = "SELECT * FROM bank_accounts WHERE status = 'ativo'";
+				$result = mysqli_query($conn, $sql);
 				if (mysqli_num_rows($result) > 0) {
 				while ($row = mysqli_fetch_assoc($result)) { ?>
-				<div style="padding: 0px !important; margin-bottom: 15px !important;" class="module"><div class="row"><div class="col-3">
-				<div style="background: url('<?php echo $row['bank_pp']; ?>');" class="userPP"></div></div>
-				<div class="col-sm"><div class="align">
-				<label class="userDesc"><?php echo $row['bank_name']; ?></label><br>
-				<label class="userTitle"><?php echo 'R$ ' . number_format($row['bank_amount'], 2, ',', '.'); ?></label>
-				</div></div></div></div>
+				<div <?php if($user['username'] == 'lancelot' OR $user['username'] == 'arthur'){}else{echo 'style="display: none !important;"';} ?> style="padding: 0px !important; margin-bottom: 15px !important;" class="module">
+				   <div class="row">
+				      <div class="col-3">
+				         <div style="background: url('<?php echo $row['bank_pp']; ?>');" class="userPP"></div>
+				      </div>
+				      <div class="col-sm">
+				         <div class="align">
+				            <label class="userDesc"><?php echo $row['bank_name']; ?></label><br>
+				            <label class="userTitle"><?php echo 'R$ ' . number_format($row['bank_amount'], 2, ',', '.'); ?></label>
+				         </div>
+				      </div>
+				   </div>
+				</div>
 				<?php } } else { echo "Nenhuma conta encontrada."; } mysqli_free_result($result); ?>
 
-                <h1 style="margin-top: 30px;" class="moduleTitle">#usuarios-online</h1>
-			    <?php
-			    $sql = "SELECT * FROM users WHERE status != 'arquivado' AND logged = 1";
-			    $result = mysqli_query($conn, $sql);
+				<h1 style="margin-top: 30px;" class="moduleTitle">#usuarios-online</h1>
+				<?php
+				$sql = "SELECT * FROM users WHERE status != 'arquivado' AND logged = 1";
+				$result = mysqli_query($conn, $sql);
 				if (mysqli_num_rows($result) > 0) {
 				while ($row = mysqli_fetch_assoc($result)) {
 				$id = $row['id'];
@@ -247,12 +254,19 @@ $totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeRepo
 				$profilePicture = $row['pp'];
 				$last_login = date('H:i', strtotime($row['last_login'])); ?>
 				<a style="color: white;" href="../user-view/?id=<?php echo $id ?>">
-				<div style="padding: 0px !important; margin-bottom: 15px !important;" class="module"><div class="row"><div class="col-3">
-				<div style="background: url('../../assets/pp/<?php echo $profilePicture; ?>');" class="userPP"></div></div>
-				<div class="col-sm"><div class="align">
-				<label class="userTitle">Sir <?php echo $username; ?> <img class="co" src="../../assets/icons/<?php echo $job_function; ?>.png"></label><br>
-				<label class="userDesc"><?php echo $name . ' ' . $surname . ' | ' . $last_login; ?></label>
-				</div></div></div></div>
+				   <div style="padding: 0px !important; margin-bottom: 15px !important;" class="module">
+				      <div class="row">
+				         <div class="col-3">
+				            <div style="background: url('../../assets/pp/<?php echo $profilePicture; ?>');" class="userPP"></div>
+				         </div>
+				         <div class="col-sm">
+				            <div class="align">
+				               <label class="userTitle">Sir <?php echo $username; ?> <img class="co" src="../../assets/icons/<?php echo $job_function; ?>.png"></label><br>
+				               <label class="userDesc"><?php echo $name . ' ' . $surname . ' | ' . $last_login; ?></label>
+				            </div>
+				         </div>
+				      </div>
+				   </div>
 				</a>
 				<?php } } else { echo "Nenhum usuário encontrado."; } mysqli_free_result($result); ?>
             </div>

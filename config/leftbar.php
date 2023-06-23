@@ -209,9 +209,6 @@
 			</div>
 		</a>
 
-		<?php $username = $user['username'];
-		if ($username == 'lancelot' OR $username == 'arthur') {
-		echo '
 		<a id="buttonsideAtive">
 			<div class="leftLink">
 				<div class="row">
@@ -224,7 +221,6 @@
 				</div>
 			</div>
 		</a>
-		'; } ?>
 
 	</div>
 </div>
@@ -312,7 +308,7 @@
 	        </div>
 	    </a>
 
-	    <a href="<?php echo routeLink('auditoria'); ?>">
+	    <a <?php if($user['username'] == 'lancelot' OR $user['username'] == 'arthur'){}else{echo 'style="display: none !important;"';} ?> href="<?php echo routeLink('auditoria'); ?>">
 	        <div class="row sideLink">
 	            <div class="col-2">
 	                <i class="fa-regular fa-chart-bar align"></i>
@@ -323,7 +319,7 @@
 	        </div>
 	    </a>
 
-	    <a href="<?php echo routeLink('usuarios'); ?>">
+	    <a <?php if($user['username'] == 'lancelot' OR $user['username'] == 'arthur'){}else{echo 'style="display: none !important;"';} ?> href="<?php echo routeLink('usuarios'); ?>">
 	        <div class="row sideLink">
 	            <div class="col-2">
 	                <i class="fa-regular fa-user align"></i>
