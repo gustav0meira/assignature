@@ -68,7 +68,7 @@ require "../../config/leftbar.php";
         		</form>
 				<?php
 				$clientId = $user['id'];
-				$consulta = "SELECT * FROM tasks WHERE responsavel = $clientId AND status = 0 ORDER BY prazo DESC";
+				$consulta = "SELECT * FROM tasks WHERE responsavel = $clientId AND status = 0 ORDER BY projeto DESC";
 				$con = $conn->query($consulta) or die($conn->error);
 				while($dado = $con->fetch_array()) { ?>
         			<div style="margin-top: 20px;" class="row task">
@@ -133,7 +133,7 @@ require "../../config/leftbar.php";
 				<?php } ?>
 				<?php
 				$clientId = $user['id'];
-				$consulta = "SELECT * FROM tasks WHERE responsavel = $clientId AND status = 1 ORDER BY prazo DESC";
+				$consulta = "SELECT * FROM tasks WHERE responsavel = $clientId AND status = 1 ORDER BY prazo DESC LIMIT 5";
 				$con = $conn->query($consulta) or die($conn->error);
 				while($dado = $con->fetch_array()) { ?>
         			<div style="margin-top: 20px;" class="row task">

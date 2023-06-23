@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <style>
 	body{
 		margin: 0px !important;
@@ -393,8 +395,8 @@ document.addEventListener('click', function(event) {
 			<div class="col-8"></div>
 			<div style="text-align: right;" class="col-4">
 				<div class="dropdown">
-					<a style="margin-left: 10px;" class="button align" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-					   ﾠ<i class="fa-solid fa-bell"></i> <?php echo $notifyCount; ?>ﾠ
+					<a style="margin-left: 10px; <?php if($notifyCount == 0){echo 'background: #FFFFFF20;';} ?>" class="button align" id="alterColor" data-bs-toggle="dropdown" aria-expanded="false">
+					   ﾠ<i class="fa-solid fa-bell"></i>ﾠ<span id="notifyCount"><?php echo $notifyCount; ?></span>ﾠ
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark">
 					<?php
@@ -406,8 +408,20 @@ document.addEventListener('click', function(event) {
 
 					if (mysqli_num_rows($con) > 0) {
 					while($dado = $con->fetch_array()) { ?>
-						<li><a class="dropdown-item" href="<?php echo routeLink('invoices'); ?>">
-						<?php echo $dado['icon'] . ' ' . $dado['title'] ?>ﾠ<label class="ntfDate"><?php echo date('M/d | h:i A', strtotime($dado['date'])); ?></label></a>
+						<li id="listItem<?php echo $dado['id']; ?>" class="dropdown-item">
+							<div class="row">
+								<div class="col-10">
+									<a style="color: white; text-decoration: none" href="<?php echo routeLink('invoices'); ?>">
+										 <?php echo $dado['icon'] . ' ' . $dado['title'] ?>ﾠ
+										<label class="ntfDate"><?php echo date('M/d | h:i A', strtotime($dado['date'])); ?></label>ﾠ
+									</a>
+								</div>
+								<div style="text-align: right !important;" class="col-2">
+									<a class="removeButton" data-id="<?php echo $dado['id']; ?>" style="color: #FFFFFF30; text-decoration: none; cursor: pointer;">
+										<i class="fa-regular fa-trash-can align"></i>
+									</a>
+								</div>
+							</div>
 						</li>
 					<?php } } else { echo '<center>Não há notificações!</center>'; } ?>
 					</ul>
@@ -416,3 +430,31 @@ document.addEventListener('click', function(event) {
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+	  $('.removeButton').click(function(e) {
+	    e.stopPropagation(); // Impede o evento de fechar o dropdown
+
+	    var id = $(this).data('id');
+
+	    $.ajax({
+	      type: 'POST',
+	      url: '../../config/deleteNotify.php',
+	      data: { id: id },
+	      success: function() {
+	        $('#listItem' + id).hide();
+	        var notifyCount = parseInt($('#notifyCount').text());
+	        notifyCount = notifyCount - 1;
+	        $('#notifyCount').text(notifyCount);
+	        if (notifyCount === 0) {
+	        	$('#alterColor').css('background-color', '#FFFFFF20 !important');
+	        }
+	      },
+	      error: function() {
+	        console.log('Ocorreu um erro na requisição AJAX.');
+	      }
+	    });
+	  });
+	});
+</script>
