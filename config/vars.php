@@ -5,7 +5,7 @@
 	$appName = 'The Circle';
 	if (isset($_SESSION['id'])) {
 	$userId = $_SESSION['id'];
-	$sqlCount = "SELECT COUNT(*) AS notifyCount FROM notifications WHERE id = '$userId'";
+	$sqlCount = "SELECT COUNT(*) AS notifyCount FROM notifications WHERE user_id = '$userId'";
 	$resultCount = mysqli_query($conn, $sqlCount);
 	$rowCount = mysqli_fetch_assoc($resultCount);
 	$notifyCount = $rowCount['notifyCount'];
