@@ -32,7 +32,12 @@ $totalClientes = $rowClientes['total_clientes'];
 $sqlTimeReport = "SELECT SUM(hours) AS total_horas FROM time_report";
 $resultTimeReport = mysqli_query($conn, $sqlTimeReport);
 $rowTimeReport = mysqli_fetch_assoc($resultTimeReport);
-$totalHoras = $valorFormatado = str_replace('.', ':', number_format($rowTimeReport['total_horas'], 2));
+if ($rowTimeReport['total_horas'] !== null) {
+    $totalHoras = number_format($rowTimeReport['total_horas'], 2);
+    $totalHoras = str_replace('.', ':', $rowTimeReport['total_horas']);
+} else {
+    $totalHoras = '0:00'; // Defina um valor padrão se não houver horas registradas
+}
 
 ?>
 

@@ -115,7 +115,7 @@ $totaldespesa = $rowdespesa['total_despesa'];
 							$con = $conn->query($consulta) or die($conn->error);
 
 							while($dado = $con->fetch_array()) { $type = $dado['type']; ?>
-						    <tr>
+							<tr>
 								<th style="padding-left: 20px;">#<?php echo $dado['id'] ?></th>
 								<td><?php echo $dado['title'] ?></td>
 								<?php $cliId = $dado['client_id']; $query = "SELECT * FROM clients WHERE id = '$cliId'";
@@ -161,6 +161,8 @@ $totaldespesa = $rowdespesa['total_despesa'];
 									?></center>
 								</td>
 								<td class="iconsTd" style="text-align: right;">
+									<a style="color: white;" href="#" onclick="solicitarValor(event, <?php echo $dado['id']; ?>, <?php echo $dado['bank_id']; ?>)"><i class="fa-solid fa-dollar"></i></a>
+
 								  	<a target="_blank" style="color: white;" href="../../faturas/?hash=<?php echo md5($dado['id']); ?>&client_id=<?php echo $dado['client_id'] ?>&id=<?php echo $dado['id'] ?>"><i class="fa-regular fa-eye"></i></a>
 									<?php if ($type == 'receita') {
 										$linkFatura = $appLocal.'/faturas/?hash='.md5($dado['id']).'&client_id='.$dado['client_id'].'&id='.$dado['id'];
@@ -172,7 +174,7 @@ $totaldespesa = $rowdespesa['total_despesa'];
 									<a style="color: white !important;" onclick="return confirm('Tenha em mente que esta ação é irreversível!');" href="./remove.php?id=<?php echo $dado['id'] ?>"><i class="fa-regular fa-trash-can"></i></a>
 								</td>
 								<td></td>
-						    </tr>
+							</tr>
 							<?php } ?>
 						  </tbody>
 						</table>
@@ -232,6 +234,19 @@ $totaldespesa = $rowdespesa['total_despesa'];
 		</form>
 	</div>
 </div>
+<script>
+function solicitarValor(event, id, bankId) {
+    event.preventDefault(); // Evita que o link seja aberto diretamente
+
+    var valor = window.prompt("Digite o valor:"); // Solicita o valor ao usuário
+
+    if (valor !== null) {
+        // Se o usuário inseriu um valor e não cancelou, redireciona para a página pagarParcial.php com o valor como parâmetro
+    	var url = "./pagarParcial.php?valor=" + valor + "&bank_id=" + bankId + "&id=" + id;
+        window.location.href = url;
+    }
+}
+</script>
 <script>
 $(document).ready(function() {
   var inputValor = document.getElementById("newFatureValor");
